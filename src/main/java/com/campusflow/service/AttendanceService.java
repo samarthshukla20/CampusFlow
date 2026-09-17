@@ -2,7 +2,7 @@ package com.campusflow.service;
 
 import com.campusflow.model.Attendance;
 import com.campusflow.repository.AttendanceRepository;
-
+import com.campusflow.exception.ValidationException;
 import java.util.List;
 
 public class AttendanceService {
@@ -32,7 +32,7 @@ public class AttendanceService {
     ) {
 
         if (studentId <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid student ID."
             );
         }
@@ -47,13 +47,13 @@ public class AttendanceService {
     ) {
 
         if (studentId <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid student ID."
             );
         }
 
         if (subjectId <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid subject ID."
             );
         }
@@ -88,33 +88,33 @@ public class AttendanceService {
     ) {
 
         if (attendance == null) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Attendance cannot be null."
             );
         }
 
         if (attendance.getStudentId() <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid student ID."
             );
         }
 
         if (attendance.getSubjectId() <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid subject ID."
             );
         }
 
         if (attendance.getAttendanceDate() == null) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Attendance date is required."
             );
         }
 
-        if (!attendance.getStatus().equals("PRESENT") &&
-                !attendance.getStatus().equals("ABSENT")) {
+        if (!"PRESENT".equals(attendance.getStatus()) &&
+                !"ABSENT".equals(attendance.getStatus())) {
 
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Status must be PRESENT or ABSENT."
             );
         }

@@ -2,7 +2,7 @@ package com.campusflow.service;
 
 import com.campusflow.model.Grade;
 import com.campusflow.repository.GradeRepository;
-
+import com.campusflow.exception.ValidationException;
 import java.util.List;
 
 public class GradeService {
@@ -29,7 +29,7 @@ public class GradeService {
     public List<Grade> getGradesForStudent(int studentId) {
 
         if (studentId <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid student ID."
             );
         }
@@ -43,13 +43,13 @@ public class GradeService {
     public Grade getGrade(int studentId, int subjectId) {
 
         if (studentId <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid student ID."
             );
         }
 
         if (subjectId <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid subject ID."
             );
         }
@@ -65,13 +65,13 @@ public class GradeService {
         validateGrade(grade);
 
         if (grade.getStudentId() <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid student ID."
             );
         }
 
         if (grade.getSubjectId() <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid subject ID."
             );
         }
@@ -85,13 +85,13 @@ public class GradeService {
     public boolean deleteGrade(int studentId, int subjectId) {
 
         if (studentId <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid student ID."
             );
         }
 
         if (subjectId <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid subject ID."
             );
         }
@@ -199,43 +199,43 @@ public class GradeService {
     private void validateGrade(Grade grade) {
 
         if (grade == null) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Grade cannot be null."
             );
         }
 
         if (grade.getStudentId() <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid student ID."
             );
         }
 
         if (grade.getSubjectId() <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Invalid subject ID."
             );
         }
 
         if (grade.getMarks() < 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Marks cannot be negative."
             );
         }
 
         if (grade.getMaxMarks() <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Maximum marks must be greater than zero."
             );
         }
 
         if (grade.getMarks() > grade.getMaxMarks()) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Marks cannot exceed maximum marks."
             );
         }
 
         if (grade.getCredits() <= 0) {
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Credits must be greater than zero."
             );
         }
