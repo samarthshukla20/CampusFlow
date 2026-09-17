@@ -9,16 +9,25 @@ public class DatabaseConnection {
     private static final String URL =
             "jdbc:mysql://localhost:3306/campusflow";
 
-    private static final String USER = "root";
+    private static final String USER =
+            System.getenv("CAMPUSFLOW_DB_USER");
 
     private static final String PASSWORD =
-            "1234";
+            System.getenv("CAMPUSFLOW_DB_PASSWORD");
 
     private DatabaseConnection() {
         // Prevent object creation
     }
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection()
+            throws SQLException {
+
+        if (USER == null || PASSWORD == null) {
+            throw new SQLException(
+                    "Database credentials are not configured."
+            );
+        }
+
         return DriverManager.getConnection(
                 URL,
                 USER,

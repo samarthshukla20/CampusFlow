@@ -127,4 +127,15 @@ public class StudentService {
                 keyword.trim()
         );
     }
+
+    public boolean deleteStudent(int studentId) {
+
+        if (studentId <= 0) {
+            throw new ValidationException(
+                    "Invalid student ID."
+            );
+        }
+
+        return studentRepository.deleteStudent(studentId);
+    }
 }
