@@ -2,6 +2,7 @@ package com.campusflow.service;
 
 import com.campusflow.model.User;
 import com.campusflow.repository.UserRepository;
+import com.campusflow.security.Role;
 import com.campusflow.util.PasswordUtil;
 import com.campusflow.exception.AuthenticationException;
 

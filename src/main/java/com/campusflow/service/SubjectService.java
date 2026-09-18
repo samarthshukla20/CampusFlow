@@ -1,5 +1,6 @@
 package com.campusflow.service;
 
+import com.campusflow.exception.ValidationException;
 import com.campusflow.model.Subject;
 import com.campusflow.repository.SubjectRepository;
 
@@ -14,6 +15,10 @@ public class SubjectService {
                 new SubjectRepository();
     }
 
+    // -----------------------------
+    // Add Subject
+    // -----------------------------
+
     public boolean addSubject(Subject subject) {
 
         validateSubject(subject);
@@ -21,14 +26,24 @@ public class SubjectService {
         return subjectRepository.addSubject(subject);
     }
 
+    // -----------------------------
+    // Get All Subjects
+    // -----------------------------
+
     public List<Subject> getAllSubjects() {
+
         return subjectRepository.getAllSubjects();
     }
+
+    // -----------------------------
+    // Get Subject By ID
+    // -----------------------------
 
     public Subject getSubjectById(int id) {
 
         if (id <= 0) {
-            throw new IllegalArgumentException(
+
+            throw new ValidationException(
                     "Subject ID must be greater than zero."
             );
         }
@@ -36,10 +51,56 @@ public class SubjectService {
         return subjectRepository.getSubjectById(id);
     }
 
-    private void validateSubject(Subject subject) {
+    // -----------------------------
+    // Update Subject
+    // -----------------------------
+
+    public boolean updateSubject(
+            Subject subject) {
+
+        validateSubject(subject);
+
+        if (subject.getId() <= 0) {
+
+            throw new ValidationException(
+                    "Invalid subject ID."
+            );
+        }
+
+        return subjectRepository.updateSubject(
+                subject
+        );
+    }
+
+    // -----------------------------
+    // Delete Subject
+    // -----------------------------
+
+    public boolean deleteSubject(
+            int subjectId) {
+
+        if (subjectId <= 0) {
+
+            throw new ValidationException(
+                    "Invalid subject ID."
+            );
+        }
+
+        return subjectRepository.deleteSubject(
+                subjectId
+        );
+    }
+
+    // -----------------------------
+    // Validation
+    // -----------------------------
+
+    private void validateSubject(
+            Subject subject) {
 
         if (subject == null) {
-            throw new IllegalArgumentException(
+
+            throw new ValidationException(
                     "Subject cannot be null."
             );
         }
@@ -47,7 +108,7 @@ public class SubjectService {
         if (subject.getSubjectCode() == null ||
                 subject.getSubjectCode().isBlank()) {
 
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Subject code cannot be empty."
             );
         }
@@ -55,7 +116,7 @@ public class SubjectService {
         if (subject.getSubjectName() == null ||
                 subject.getSubjectName().isBlank()) {
 
-            throw new IllegalArgumentException(
+            throw new ValidationException(
                     "Subject name cannot be empty."
             );
         }
