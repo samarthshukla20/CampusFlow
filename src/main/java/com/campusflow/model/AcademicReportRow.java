@@ -7,6 +7,7 @@ public class AcademicReportRow {
 
     private double marks;
     private double maxMarks;
+    private int credits;
 
     private String letterGrade;
     private double gradePoint;
@@ -18,6 +19,7 @@ public class AcademicReportRow {
             String subjectName,
             double marks,
             double maxMarks,
+            int credits,
             String letterGrade,
             double gradePoint,
             double attendancePercentage) {
@@ -26,6 +28,7 @@ public class AcademicReportRow {
         this.subjectName = subjectName;
         this.marks = marks;
         this.maxMarks = maxMarks;
+        this.credits = credits;
         this.letterGrade = letterGrade;
         this.gradePoint = gradePoint;
         this.attendancePercentage =
@@ -46,6 +49,10 @@ public class AcademicReportRow {
 
     public double getMaxMarks() {
         return maxMarks;
+    }
+
+    public int getCredits() {
+        return credits;
     }
 
     public String getLetterGrade() {

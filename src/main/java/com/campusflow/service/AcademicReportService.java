@@ -62,14 +62,23 @@ public class AcademicReportService {
         }
 
         double totalPoints = 0.0;
+        int totalCredits = 0;
 
         for (AcademicReportRow row : rows) {
 
             totalPoints +=
-                    row.getGradePoint();
+                    row.getGradePoint()
+                            * row.getCredits();
+
+            totalCredits +=
+                    row.getCredits();
         }
 
-        return totalPoints / rows.size();
+        if (totalCredits == 0) {
+            return 0.0;
+        }
+
+        return totalPoints / totalCredits;
     }
 
     public double calculateAverageAttendance(

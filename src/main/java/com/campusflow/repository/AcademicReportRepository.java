@@ -22,6 +22,7 @@ public class AcademicReportRepository {
                     sub.subject_name,
                     g.marks,
                     g.max_marks,
+                    g.credits,
 
                     COALESCE(
                         (
@@ -87,6 +88,11 @@ public class AcademicReportRepository {
                                     "max_marks"
                             );
 
+                    int credits =
+                            resultSet.getInt(
+                                    "credits"
+                            );
+
                     double attendance =
                             resultSet.getDouble(
                                     "attendance_percentage"
@@ -111,6 +117,7 @@ public class AcademicReportRepository {
                                     subjectName,
                                     marks,
                                     maxMarks,
+                                    credits,
                                     letterGrade,
                                     gradePoint,
                                     attendance

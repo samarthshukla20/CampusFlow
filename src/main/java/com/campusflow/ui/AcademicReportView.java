@@ -522,14 +522,7 @@ public class AcademicReportView {
                     reportService
                             .calculateAverageAttendance(rows);
 
-            /*
-             * AcademicReportService currently calculates
-             * GPA as an unweighted average of grade points.
-             *
-             * This value is displayed as a report summary
-             * for now. The official credit-weighted GPA will
-             * be integrated using GradeService later.
-             */
+
             double gpa =
                     reportService.calculateGPA(rows);
 

@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import com.campusflow.util.PasswordUtil;
 
 public class FacultyRepository {
 
@@ -52,12 +53,10 @@ public class FacultyRepository {
                         faculty.getEmail()
                 );
 
-                // Temporary password.
-                // Password hashing will be handled
-                // in the security cleanup phase.
+
                 userStatement.setString(
                         3,
-                        "temporary123"
+                        PasswordUtil.hashPassword("temporary123")
                 );
 
                 userStatement.executeUpdate();

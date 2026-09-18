@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import com.campusflow.util.PasswordUtil;
 
 public class StudentRepository {
 
@@ -45,9 +46,10 @@ public class StudentRepository {
                 userStatement.setString(1, student.getName());
                 userStatement.setString(2, student.getEmail());
 
-                // Temporary password.
-                // Authentication will be implemented later.
-                userStatement.setString(3, "temporary123");
+                userStatement.setString(
+                        3,
+                        PasswordUtil.hashPassword("temporary123")
+                );
 
                 userStatement.executeUpdate();
 
