@@ -224,7 +224,6 @@ CAMPUSFLOW_DB_USER=root
 CAMPUSFLOW_DB_PASSWORD=your_password
 ```
 
-Do not commit actual database credentials to GitHub.
 
 ---
 
